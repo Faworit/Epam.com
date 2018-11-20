@@ -12,7 +12,6 @@ public class StartOfEncryption {
         char[] keyForAllText;
         char[][] tableOfVizhiner;
         String fromFile;
-        String fromFileRu;
         String fromEncryptedFile;
         String encrypted;
         String descrypted;
