@@ -7,7 +7,7 @@ public class WorkWithFiles implements AutoCloseable {
 
     public String readFromFile(){
         String text = "";
-        try (FileReader fileReader = new FileReader("FileToEncryption.txt")){
+        try (FileReader fileReader = new FileReader("src\\com\\epam\\encryption\\FileToEncryption.txt")){
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             text = bufferedReader.readLine();
         } catch (FileNotFoundException e) {
@@ -20,7 +20,7 @@ public class WorkWithFiles implements AutoCloseable {
     }
     public String readFromFileRu(){
         String text = "";
-        try (FileReader fileReader = new FileReader("FileToEncryptionRu.txt")){
+        try (FileReader fileReader = new FileReader("src\\com\\epam\\encryption\\FileToEncryptionRu.txt")){
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             text = bufferedReader.readLine();
         } catch (FileNotFoundException e) {
