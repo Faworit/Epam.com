@@ -2,7 +2,7 @@ package com.epam.encryption;
 
 
 
-public class Main {
+public class StartOfEncryption {
 
     public static void main(String[] args) {
         int countOfLetter;
