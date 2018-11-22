@@ -3,9 +3,9 @@ package com.epam.encryption;
 import java.io.*;
 
 
-public class WorkWithFiles implements AutoCloseable {
+class WorkWithFiles implements AutoCloseable {
 
-    public String readFromFile(){
+    String readFromFile(){
         String text = "";
         try (FileReader fileReader = new FileReader("src\\com\\epam\\encryption\\FileToEncryption.txt")){
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -18,7 +18,7 @@ public class WorkWithFiles implements AutoCloseable {
 
         return text;
     }
-    public String readFromFileRu(){
+    String readFromFileRu(){
         String text = "";
         try (FileReader fileReader = new FileReader("src\\com\\epam\\encryption\\FileToEncryptionRu.txt")){
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -32,7 +32,7 @@ public class WorkWithFiles implements AutoCloseable {
         return text;
     }
 
-    public void writeInFile(String encrypted){
+    void writeInFile(String encrypted){
         try(Writer wtiteToFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Encrypted.txt")))) {
             wtiteToFile.write(encrypted);
         } catch (FileNotFoundException e) {
@@ -42,7 +42,7 @@ public class WorkWithFiles implements AutoCloseable {
         }
     }
 
-    public String readFromEncryptedFile(){
+    String readFromEncryptedFile(){
         String text = "";
         try (FileReader fileReader = new FileReader("Encrypted.txt")){
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -58,7 +58,7 @@ public class WorkWithFiles implements AutoCloseable {
 
 
     @Override
-    public void close() throws Exception {
+    public void close() {
 
     }
 }

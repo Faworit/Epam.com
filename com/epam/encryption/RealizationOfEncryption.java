@@ -2,9 +2,9 @@ package com.epam.encryption;
 
 
 
-public class Encryption {
+class RealizationOfEncryption {
 
-    public String charToString(char[] array){
+    String charToString(char[] array){
         String textFromArray = "";
         for(int i=0; i<array.length; i++){
             textFromArray += Character.toString(array[i]);
@@ -12,12 +12,13 @@ public class Encryption {
         return textFromArray;
     }
 
-    public char[] generationFullKey(char[] key, String fromFile){
+    char[] generationFullKey(char[] key, String fromFile){
         char[] text = fromFile.toCharArray();
         char[] fullKey = new char[text.length];
         int forKeyIncriment = 0;
         for(int i=0; i<fullKey.length; i++){
             fullKey[i] = key[forKeyIncriment];
+            forKeyIncriment++;
             if(forKeyIncriment==2){
                 forKeyIncriment = 0;
             }
@@ -25,17 +26,20 @@ public class Encryption {
         return fullKey;
     }
 
-    public String encrypt(String textFromFile, char[] key, char[][] tableOfVizhiner, int startFromChar){
+    String encrypt(String textFromFile, char[] key, char[][] tableOfVizhiner, int startFromChar){
         char[] text = textFromFile.toCharArray();
         char[] encrypted = new char[text.length];
         String encryptedText;
         int horizontal;
         int vertical;
         int notAlphabetSymbol;
+        int firstPunctuationMark = 31;
+        int lastPunctuationMark = 66;
+        int forIncryptionPunctuationMarks = 10;
         for(int i=0; i<text.length; i++){
             notAlphabetSymbol = text[i];
-            if(notAlphabetSymbol<66 && notAlphabetSymbol>31){
-                notAlphabetSymbol *= 10;
+            if(notAlphabetSymbol<lastPunctuationMark && notAlphabetSymbol>firstPunctuationMark){
+                notAlphabetSymbol *= forIncryptionPunctuationMarks;
                 encrypted[i] = (char)notAlphabetSymbol;
             }
             else {
@@ -48,15 +52,18 @@ public class Encryption {
         return encryptedText;
     }
 
-    public String descrypt(String encrypted, char[] key, char[][] tableOfVizhiner, int countOfLetter, int startFromChar){
+    String descrypt(String encrypted, char[] key, char[][] tableOfVizhiner, int countOfLetter, int startFromChar){
         char[] encryptedChars = encrypted.toCharArray();
         char[] descrypted = new char[encryptedChars.length];
         String descryptedText;
         int horizontal;
         int vertical;
+        int firstPunctuationMark = 31;
+        int lastPunctuationMark = 66;
+        int forDescryptionPunctuationMarks = 10;
         for(int i = 0; i<encryptedChars.length; i++){
-            int numOfSymbol = encryptedChars[i]/10;
-            if(numOfSymbol<66 && numOfSymbol>31){
+            int numOfSymbol = encryptedChars[i]/forDescryptionPunctuationMarks;
+            if(numOfSymbol<lastPunctuationMark && numOfSymbol>firstPunctuationMark){
               descrypted[i] = (char)numOfSymbol;
             }
             else {
