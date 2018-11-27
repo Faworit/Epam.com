@@ -24,6 +24,7 @@ public class Run {
             String str = sentence.getSentence();
             System.out.println(str);
         }
+        int t;
 
     }
 }
