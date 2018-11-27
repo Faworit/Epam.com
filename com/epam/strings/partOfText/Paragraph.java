@@ -1,17 +1,17 @@
-package com.epam.strings;
+package com.epam.strings.partOfText;
 
 import java.util.ArrayList;
 
 public class Paragraph {
-    String paragraph;
+    private String paragraph45;
     private ArrayList<Paragraph> paragraphs = new ArrayList<>();
 
-    Paragraph(String paragraph){
-        this.paragraph = paragraph;
+    public Paragraph(String paragraph){
+        this.paragraph45 = paragraph;
     }
 
     public String getParagraph() {
-        return paragraph;
+        return paragraph45;
     }
 
     public ArrayList<Paragraph> getParagraphs() {

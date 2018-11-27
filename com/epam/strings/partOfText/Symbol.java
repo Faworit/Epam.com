@@ -1,4 +1,4 @@
-package com.epam.strings;
+package com.epam.strings.partOfText;
 
 import java.util.ArrayList;
 

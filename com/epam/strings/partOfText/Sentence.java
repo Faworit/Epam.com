@@ -1,4 +1,4 @@
-package com.epam.strings;
+package com.epam.strings.partOfText;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ public class Sentence {
     private String sentence;
     private ArrayList<Sentence> sentences = new ArrayList<>();
 
-    Sentence(String sentence){
+    public Sentence(String sentence){
         this.sentence = sentence;
     }
 
