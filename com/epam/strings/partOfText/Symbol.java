@@ -6,7 +6,7 @@ public class Symbol {
     private char symbol;
     private ArrayList<Symbol> symbols = new ArrayList<>();
 
-    Symbol(char symbol){
+    public Symbol(char symbol){
         this.symbol = symbol;
     }
 

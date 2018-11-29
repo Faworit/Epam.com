@@ -2,10 +2,11 @@ package com.epam.strings;
 
 import com.epam.strings.partOfText.Paragraph;
 import com.epam.strings.partOfText.Sentence;
+import com.epam.strings.partOfText.Symbol;
 import com.epam.strings.partOfText.Word;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class WorkWithText {
 
@@ -35,14 +36,29 @@ public class WorkWithText {
 
     static ArrayList<Word> parseToWords(ArrayList<Sentence> sentences){
         ArrayList<Word> words = new ArrayList<>();
-        for(int i = 0; i<sentences.size(); i++){
+        for (int i = 0; i < sentences.size(); i++) {
             String sentense = sentences.get(i).getSentence();
-            String[] arrayOfWords = sentense.split("\\b");
-            Word word = new Word(arrayOfWords[i]);
-            words.add(word);
+            String[] arrayOfWords = sentense.split("\\b(\\n)");
+            for (int z = 0; z < arrayOfWords.length; z++) {
+                Word word = new Word(arrayOfWords[z]);
+                words.add(word);
+            }
         }
 
         return words;
+    }
+
+    static ArrayList<Symbol> parseToSymbols(ArrayList<Word> words){
+        ArrayList<Symbol> symbols = new ArrayList<>();
+        for (int i = 0; i < words.size(); i++) {
+            String word = words.get(i).getWord();
+            char[] arrayOfSymbols = word.toCharArray();
+            for (int z = 0; z < arrayOfSymbols.length; z++) {
+                Symbol symbol = new Symbol(arrayOfSymbols[z]);
+                symbols.add(symbol);
+            }
+        }
+        return symbols;
     }
 
 
