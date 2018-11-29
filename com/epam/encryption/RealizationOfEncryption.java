@@ -35,10 +35,10 @@ class RealizationOfEncryption {
         int notAlphabetSymbol;
         int firstPunctuationMark = 31;
         int lastPunctuationMark = 66;
-        int forIncryptionPunctuationMarks = 10;
+        int forIncryptionPunctuationMarks = 5;
         for(int i=0; i<text.length; i++){
             notAlphabetSymbol = text[i];
-            if(notAlphabetSymbol<lastPunctuationMark && notAlphabetSymbol>firstPunctuationMark){
+            if(notAlphabetSymbol<lastPunctuationMark && notAlphabetSymbol>firstPunctuationMark || notAlphabetSymbol==10){
                 notAlphabetSymbol *= forIncryptionPunctuationMarks;
                 encrypted[i] = (char)notAlphabetSymbol;
             }
@@ -60,10 +60,10 @@ class RealizationOfEncryption {
         int vertical;
         int firstPunctuationMark = 31;
         int lastPunctuationMark = 66;
-        int forDescryptionPunctuationMarks = 10;
+        int forDescryptionPunctuationMarks = 5;
         for(int i = 0; i<encryptedChars.length; i++){
             int numOfSymbol = encryptedChars[i]/forDescryptionPunctuationMarks;
-            if(numOfSymbol<lastPunctuationMark && numOfSymbol>firstPunctuationMark){
+            if(numOfSymbol<lastPunctuationMark && numOfSymbol>firstPunctuationMark || numOfSymbol==10){
               descrypted[i] = (char)numOfSymbol;
             }
             else {
