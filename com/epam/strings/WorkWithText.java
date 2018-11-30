@@ -6,6 +6,8 @@ import com.epam.strings.partOfText.Symbol;
 import com.epam.strings.partOfText.Word;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class WorkWithText {
@@ -22,14 +24,16 @@ public class WorkWithText {
 
     static ArrayList<Sentence> parseToSentence(ArrayList<Paragraph> paragraphs){
         ArrayList<Sentence> sentences = new ArrayList<>();
+        ArrayList<String> str = new ArrayList<>();
+        Paragraph paragraph;
         for(int i = 0; i<paragraphs.size(); i++){
-           String paragraph = paragraphs.get(i).getParagraph();
-           String[] arrayOfSentences = paragraph.split("\\.(\\n)");
-           for(int z = 0; z<arrayOfSentences.length; z++){
-               arrayOfSentences[z].split(" ");
-               Sentence sentence = new Sentence(arrayOfSentences[z]);
-               sentences.add(sentence);
-           }
+          paragraph = paragraphs.get(i);
+          String par = paragraph.getParagraph();
+          Matcher matcher = Pattern.compile("([^.!?]+[.!?])").matcher(par);
+          while (matcher.find()){
+              Sentence sentence = new Sentence(matcher.group());
+              sentences.add(sentence);
+            }
         }
         return sentences;
     }
@@ -61,6 +65,15 @@ public class WorkWithText {
         return symbols;
     }
 
+    public static ArrayList<Word> parseToWordForExercizeA(String text){
+        ArrayList<Word> words = new ArrayList<>();
+        String[] arrayOfWords = text.split("\\b");
+        for(int i = 0; i<arrayOfWords.length; i++){
+            Word word = new Word(arrayOfWords[i]);
+            words.add(word);
+        }
+        return words;
+    }
 
 
 }
