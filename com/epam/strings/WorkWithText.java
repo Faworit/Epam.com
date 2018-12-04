@@ -1,9 +1,6 @@
 package com.epam.strings;
 
-import com.epam.strings.partOfText.Paragraph;
-import com.epam.strings.partOfText.Sentence;
-import com.epam.strings.partOfText.Symbol;
-import com.epam.strings.partOfText.Word;
+import com.epam.strings.partOfText.*;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -24,7 +21,6 @@ public class WorkWithText {
 
     static ArrayList<Sentence> parseToSentence(ArrayList<Paragraph> paragraphs){
         ArrayList<Sentence> sentences = new ArrayList<>();
-        ArrayList<String> str = new ArrayList<>();
         Paragraph paragraph;
         for(int i = 0; i<paragraphs.size(); i++){
           paragraph = paragraphs.get(i);
@@ -42,9 +38,9 @@ public class WorkWithText {
         ArrayList<Word> words = new ArrayList<>();
         for (int i = 0; i < sentences.size(); i++) {
             String sentense = sentences.get(i).getSentence();
-            String[] arrayOfWords = sentense.split("\\b(\\n)");
-            for (int z = 0; z < arrayOfWords.length; z++) {
-                Word word = new Word(arrayOfWords[z]);
+            Matcher matcher = Pattern.compile("[^\",.!?\\s{1}]+").matcher(sentense);
+            while (matcher.find()){
+                Word word = new Word(matcher.group());
                 words.add(word);
             }
         }
@@ -52,28 +48,36 @@ public class WorkWithText {
         return words;
     }
 
-    static ArrayList<Symbol> parseToSymbols(ArrayList<Word> words){
-        ArrayList<Symbol> symbols = new ArrayList<>();
-        for (int i = 0; i < words.size(); i++) {
-            String word = words.get(i).getWord();
-            char[] arrayOfSymbols = word.toCharArray();
-            for (int z = 0; z < arrayOfSymbols.length; z++) {
-                Symbol symbol = new Symbol(arrayOfSymbols[z]);
-                symbols.add(symbol);
+    static ArrayList<Lexeme> parseToLexemes(ArrayList<Sentence> sentences){
+        ArrayList<Lexeme> lexemes = new ArrayList<>();
+        for (int i = 0; i < sentences.size(); i++) {
+            String sentense = sentences.get(i).getSentence();
+            Matcher matcher = Pattern.compile("[^\\s]+").matcher(sentense);
+            while (matcher.find()){
+                Lexeme lexeme = new Lexeme(matcher.group());
+                lexemes.add(lexeme);
             }
+        }
+        return lexemes;
+    }
+
+    static ArrayList<Symbol> parseToSymbols(String text){
+        char[] arrayOfSymbols = text.toCharArray();
+        ArrayList<Symbol> symbols = new ArrayList<>();
+        for (int i = 0; i < text.length(); i++) {
+            Symbol symbol = new Symbol(arrayOfSymbols[i]);
+            symbols.add(symbol);
         }
         return symbols;
     }
 
     public static ArrayList<Word> parseToWordForExercizeA(String text){
         ArrayList<Word> words = new ArrayList<>();
-        String[] arrayOfWords = text.split("\\b");
-        for(int i = 0; i<arrayOfWords.length; i++){
-            Word word = new Word(arrayOfWords[i]);
+        Matcher matcher = Pattern.compile("[^\",.!?\\s{1}]+").matcher(text);
+        while (matcher.find()){
+            Word word = new Word(matcher.group());
             words.add(word);
         }
         return words;
     }
-
-
 }

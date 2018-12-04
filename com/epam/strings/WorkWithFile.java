@@ -10,7 +10,7 @@ public class WorkWithFile {
     public static String ReadFromFile(){
         StringBuilder stringBuilder = new StringBuilder();
         String text;
-        try(FileReader fileReader = new FileReader("src\\com\\epam\\strings\\Text.txt")) {
+        try(FileReader fileReader = new FileReader("com\\epam\\strings\\Text.txt")) {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             while((text = bufferedReader.readLine()) !=null){
                 stringBuilder.append(text + "\n");
