@@ -30,7 +30,7 @@ public class WorkWithString {
         String str = forRegex.replaceFirst("1{1}0{1,}1{2,}", inverted);
         afterreplace.append(str);
         System.out.println(afterreplace);
-        checkString = forRegex.matches("1{1}0{1,}1{2,}");
+        checkString = forRegex.matches("1{1}0{1,}1{2,}"); // create new method where we will realize check and return boolean
         System.out.println(checkString);
         if(checkString){
             toCommonView(afterreplace);
