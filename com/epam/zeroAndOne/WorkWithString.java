@@ -1,10 +1,25 @@
 package com.epam.zeroAndOne;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WorkWithString {
+
+    public String checkOfCommonView(StringBuilder s){
+        String result;
+        boolean con;
+        do {
+            StringBuilder strb = toCommonView(s);
+            String fromBuilder = strb.toString();
+            Matcher matcher = Pattern.compile("1{1}0{1,}1{2,}").matcher(fromBuilder);
+            con = matcher.find();
+            s=strb;
+        }
+        while(con);
+        result = s.toString();
+
+        return result;
+    }
 
     private String reverse(String string){
         StringBuilder r = new StringBuilder(string);
@@ -13,33 +28,25 @@ public class WorkWithString {
         return inverted;
     }
 
-    public String toCommonView(StringBuilder s){
-        boolean checkString;
-        String forRegex  = s.toString();
-        String subString;
-        String inverted;
-        String commonView = "";
-        StringBuilder afterreplace = new StringBuilder();
+    private StringBuilder replaceSubstring(String subStringMatcherReversible, StringBuilder s){
+        String forReplace = s.toString();
+        String afterReplace = forReplace.replaceFirst("1{1}0{1,}1{2,}", subStringMatcherReversible);
+        StringBuilder stringBuilder = new StringBuilder(afterReplace);
 
-        Matcher matcher = Pattern.compile("1{1}0{1,}1{2,}").matcher(forRegex);
+        return stringBuilder;
+    }
+
+    private StringBuilder toCommonView(StringBuilder s){
+        String subStringMatcher;
+        String reversible;
+        String fromBuilder = s.toString();
+        Matcher matcher = Pattern.compile("1{1}0{1,}1{2,}").matcher(fromBuilder);
         matcher.find();
-        subString = matcher.group();
-        inverted = reverse(subString);
-        System.out.println(subString);
-        System.out.println(inverted);
-        String str = forRegex.replaceFirst("1{1}0{1,}1{2,}", inverted);
-        afterreplace.append(str);
-        System.out.println(afterreplace);
-        checkString = forRegex.matches("1{1}0{1,}1{2,}"); // create new method where we will realize check and return boolean
-        System.out.println(checkString);
-        if(checkString){
-            toCommonView(afterreplace);
-        }
-        else{
-            commonView = afterreplace.toString();
-        }
+        subStringMatcher = matcher.group();
+        reversible = reverse(subStringMatcher);
+        s = replaceSubstring(reversible, s);
 
-        return commonView;
+        return s;
     }
 
     static int calculationDigitOne(String string){
@@ -50,6 +57,7 @@ public class WorkWithString {
                 count+=1;
             }
         }
+
         return count;
     }
 
@@ -61,6 +69,7 @@ public class WorkWithString {
                 count+=1;
             }
         }
+
         return count;
     }
 }
